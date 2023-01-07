@@ -1,0 +1,3 @@
+[submodule "WS-AUTH"]
+	path = WS-AUTH
+	url = https://github.com/cherryReptile/WS-AUTH
