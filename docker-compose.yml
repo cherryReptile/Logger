@@ -16,7 +16,7 @@ services:
     ports:
       - "2345:2345"
     volumes:
-      - ./app:/usr/src/app
+      - ./WS-APP:/usr/src/app
       - /etc/passwd:/etc/passwd
       - /etc/shadow:/etc/shadow
       - ~/go/pkg:/go/pkg # для синхронизиации пакетов с IDE
