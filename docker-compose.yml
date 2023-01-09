@@ -7,14 +7,15 @@ services:
       - ./nginx/templates:/etc/nginx/templates
     ports:
       - "80:80"
+    depends_on:
+      - app
+      - auth
     command: [ nginx-debug, '-g', 'daemon off;' ]
   app:
     image: orendat/go:latest
     user: "1000:1000"
     environment:
       - GOCACHE=/usr/src/app/tmp/cache
-    ports:
-      - "2345:2345"
     volumes:
       - ./WS-APP:/usr/src/app
       - /etc/passwd:/etc/passwd
