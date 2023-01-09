@@ -1,7 +1,10 @@
 package main
 
-import "fmt"
+import (
+	"github.com/Logger/app/internal/app"
+)
 
 func main() {
-	fmt.Println("test")
+	app := app.NewApp()
+	app.Run("80")
 }
