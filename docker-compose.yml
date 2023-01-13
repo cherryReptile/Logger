@@ -27,24 +27,26 @@ services:
     restart: unless-stopped
     command: [ "postgres", "-c", "log_statement=all", "-c", "log_destination=stderr" ]
     env_file:
-      - ./WS-AUTH/.env
+      - .env
     environment:
       POSTGRES_DB: ${DB_NAME}
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
     volumes:
-      - ./WS-AUTH/docker/pg/data:/var/lib/postgresql/data
+      - ./db/pg/data:/var/lib/postgresql/data
     ports:
       - ${DB_PORT:-5432}:5432
   auth:
-    image: golang:1.19-alpine
+    image: orendat/go:latest
     restart: unless-stopped
+    environment:
+      - GOCACHE=/usr/src/auth/tmp/cache
     depends_on:
       - db
     volumes:
-      - ./WS-AUTH:/auth
+      - ./WS-AUTH:/usr/src/auth
       - ~/go/pkg:/go/pkg
-    working_dir: /auth
+    working_dir: /usr/src/auth
     command: sh -c "go build -o /tmp/auth ./cmd && /tmp/auth"
     env_file:
       - ./WS-AUTH/.env
