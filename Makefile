@@ -14,11 +14,11 @@ up:
 down:
 	docker-compose stop
 migrate:
-	docker-compose exec auth migrate create -ext sql -dir grpc/internal/migrations ${name}
+	docker-compose exec auth migrate create -ext sql -dir migrations ${name}
 migrate.up:
-	docker-compose exec auth migrate -database "postgres://$(DB_USER):$(DB_PASSWORD)@$(DB_HOST):5432/$(DB_NAME)?sslmode=disable" -path grpc/internal/migrations up
+	docker-compose exec auth migrate -database "postgres://$(DB_USER):$(DB_PASSWORD)@$(DB_HOST):5432/$(DB_NAME)?sslmode=disable" -path migrations up
 migrate.down:
-	docker-compose exec auth migrate -database "postgres://$(DB_USER):$(DB_PASSWORD)@$(DB_HOST):5432/$(DB_NAME)?sslmode=disable" -path grpc/internal/migrations down
+	docker-compose exec auth migrate -database "postgres://$(DB_USER):$(DB_PASSWORD)@$(DB_HOST):5432/$(DB_NAME)?sslmode=disable" -path migrations down
 exec:
 	docker-compose exec app sh
 exec.root:
